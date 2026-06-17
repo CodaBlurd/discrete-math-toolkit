@@ -15,6 +15,14 @@ public class BaseConverter implements NumberConverter {
     public ConversionResult convert(String value, int fromBase, int toBase) {
         validateBase(fromBase);
         validateBase(toBase);
+        String normalizedValue = value.toUpperCase();
+
+        // Check if the value contains a decimal point and handle the edge case.
+        if (normalizedValue.contains(".")) {
+            double decimalValue = handleToDecimalFractions(normalizedValue, fromBase);
+            String result = handleFromDecimalFractions(decimalValue, toBase);
+            return new ConversionResult(result, toBase);
+        }
         int decimalValue = toDecimal(value, fromBase); // Convert to decimal
 
         String result = fromDecimal(decimalValue, toBase); // Convert back to the desired base
@@ -92,5 +100,61 @@ public class BaseConverter implements NumberConverter {
         if (base < 2 || base > 36) {
             throw new IllegalArgumentException("Base must be between 2 and 36");
         }
+    }
+
+    private String handleFromDecimalFractions(double decimalValue, int toBase) {
+        int wholePart = (int) decimalValue;
+        double fractionPart = decimalValue - wholePart;
+
+        String wholeResult = fromDecimal(wholePart, toBase);
+
+        if (fractionPart == 0) {
+            return wholeResult; // early return
+        }
+
+        StringBuilder fractionResult = new StringBuilder();
+
+        int maxFractionDigits = 10; // prevents infinite loops
+
+        while ((fractionPart > 0) && (fractionResult.length() < maxFractionDigits)) {
+
+            fractionPart *= toBase;
+
+            int digit = (int) fractionPart; // get the next digit
+
+            fractionResult.append(digitToChar(digit)); // append the digit to the result
+
+            fractionPart -= digit; // remove the used digit
+        }
+
+        return wholeResult + "." + fractionResult;
+    }
+
+    private double handleToDecimalFractions(String normalizedValue, int fromBase){
+            double tempSum = 0;
+            String[] split = normalizedValue.split("\\."); // split the string at the decimal point
+            String wholePart = split[0];
+            String fractionPart = split[1];
+            int wholePower = 0;
+
+            for (int i = wholePart.length() - 1; i >= 0; i--) {
+                char currentChar = wholePart.charAt(i);
+                int digit = charToDigit(currentChar);
+                tempSum += digit * Math.pow(fromBase, wholePower);
+                wholePower++;
+            }
+
+
+            int fractionPower = -fractionPart.length();
+            for (int i = fractionPart.length() - 1; i >= 0; i--) {
+                char currentChar = fractionPart.charAt(i);
+                int digit = charToDigit(currentChar);
+                tempSum += digit * Math.pow(fromBase, fractionPower);
+                fractionPower++;
+            }
+
+            return tempSum;
+
+
     }
 }

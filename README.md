@@ -4,10 +4,6 @@ A pure Java implementation of core discrete mathematics concepts and algorithms.
 
 The goal of this project is to learn and demonstrate discrete mathematics through software implementation rather than relying on existing mathematics libraries.
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Philosophy
 
 * Pure Java

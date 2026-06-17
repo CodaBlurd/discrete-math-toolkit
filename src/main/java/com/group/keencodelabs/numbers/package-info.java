@@ -1,7 +1,8 @@
 /**
- * Contains classes for numbers.
+ * Number systems and number theory.
  * <p>
- *     Numbers are used to represent numbers. Classes in this package represent different number systems.
+ *     Provides base conversion between any bases 2–36, with support for fractional values.
+ *     Future additions include prime checking, GCD, LCM, and modular arithmetic.
  * </p>
  * @since 1.0.0
  * @author Godwill Christopher
