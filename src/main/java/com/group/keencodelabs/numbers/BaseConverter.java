@@ -15,6 +15,7 @@ public class BaseConverter implements NumberConverter {
     public ConversionResult convert(String value, int fromBase, int toBase) {
         validateBase(fromBase);
         validateBase(toBase);
+        validateValueForBase(value, fromBase);
         String normalizedValue = value.toUpperCase();
 
         // Check if the value contains a decimal point and handle the edge case.
@@ -99,6 +100,33 @@ public class BaseConverter implements NumberConverter {
     private void validateBase(int base) {
         if (base < 2 || base > 36) {
             throw new IllegalArgumentException("Base must be between 2 and 36");
+        }
+    }
+
+    private void validateDigitForBase(char c, int base) {
+        int digitValue;
+
+        if (c >= '0' && c <= '9') {
+            digitValue = c - '0';
+        } else if (c >= 'A' && c <= 'Z') {
+            digitValue = c - 'A' + 10;
+        } else if (c >= 'a' && c <= 'z') {
+            digitValue = c - 'a' + 10;
+        } else {
+            throw new IllegalArgumentException("Invalid character: " + c);
+        }
+
+        if (digitValue >= base) {
+            throw new IllegalArgumentException(
+                    String.format("Character '%c' (value %d) is invalid for base %d", c, digitValue, base)
+            );
+        }
+    }
+
+    private void validateValueForBase(String value, int base) {
+        String normalized = value.replace(".", ""); // Ignore decimal point
+        for (char c : normalized.toCharArray()) {
+            validateDigitForBase(c, base);
         }
     }
 
