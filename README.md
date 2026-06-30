@@ -22,14 +22,17 @@ The goal of this project is to learn and demonstrate discrete mathematics throug
 * Hexadecimal ↔ Decimal
 * Arbitrary Base Conversion (2–36)
 
-## Planned Features
-
 ### Number Theory
 
 * Prime Number Checking
 * Greatest Common Divisor (GCD)
 * Least Common Multiple (LCM)
 * Euclidean Algorithm
+
+## Planned Features
+
+### Number Theory
+
 * Modular Arithmetic
 
 ### Sets
@@ -80,9 +83,9 @@ mvn test
 ## Roadmap
 
 * [x] Base Conversion
-* [ ] Prime Checker
-* [ ] GCD Calculator
-* [ ] LCM Calculator
+* [x] Prime Checker
+* [x] GCD Calculator
+* [x] LCM Calculator
 * [ ] Set Operations
 * [ ] Truth Tables
 * [ ] Combinatorics
