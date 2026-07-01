@@ -22,7 +22,7 @@ The goal of this project is to learn and demonstrate discrete mathematics throug
 * Hexadecimal ↔ Decimal
 * Arbitrary Base Conversion (2–36)
 
-### Number Theory
+### Number Theory Scaffolding
 
 * Prime Number Checking
 * Greatest Common Divisor (GCD)
@@ -33,6 +33,8 @@ The goal of this project is to learn and demonstrate discrete mathematics throug
 
 ### Number Theory
 
+* Greatest Common Divisor (GCD)
+* Least Common Multiple (LCM)
 * Modular Arithmetic
 
 ### Sets
@@ -84,8 +86,8 @@ mvn test
 
 * [x] Base Conversion
 * [x] Prime Checker
-* [x] GCD Calculator
-* [x] LCM Calculator
+* [ ] GCD Calculator
+* [ ] LCM Calculator
 * [ ] Set Operations
 * [ ] Truth Tables
 * [ ] Combinatorics

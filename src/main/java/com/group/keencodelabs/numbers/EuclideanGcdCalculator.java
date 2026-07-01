@@ -12,7 +12,7 @@ public class EuclideanGcdCalculator implements GcdCalculator {
      */
     @Override
     public int calculate(int firstNumber, int secondNumber) {
-        return calculateWithSteps(firstNumber, secondNumber).gcd();
+        return 0;
     }
 
     /**
@@ -23,29 +23,6 @@ public class EuclideanGcdCalculator implements GcdCalculator {
      */
     @Override
     public GcdResult calculateWithSteps(int firstNumber, int secondNumber) {
-        validateInput(firstNumber, secondNumber);
-
-        long a = absoluteAsLong(firstNumber);
-        long b = absoluteAsLong(secondNumber);
-        int steps = 0;
-
-        while (b != 0) {
-            long remainder = a % b;
-            a = b;
-            b = remainder;
-            steps++;
-        }
-
-        return new GcdResult(firstNumber, secondNumber, Math.toIntExact(a), steps);
-    }
-
-    private void validateInput(int firstNumber, int secondNumber) {
-        if (firstNumber == 0 && secondNumber == 0) {
-            throw new IllegalArgumentException("GCD is undefined for 0 and 0");
-        }
-    }
-
-    private long absoluteAsLong(int number) {
-        return Math.abs((long) number);
+        return new GcdResult(firstNumber, secondNumber, 0, 0);
     }
 }
